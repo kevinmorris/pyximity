@@ -6,7 +6,7 @@ class Pyximity:
     self.neighbors = neighbors
     self.values = values
     
-  def regress(self, target, kernel=lambda dNorm: 1 - dNorm, k=5):
+  def regress(self, target, k=5, kernel=lambda dNorm: 1 - dNorm):
     neighborCount = self.neighbors.shape[0]
 
     #Using Euclidian distance
