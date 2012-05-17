@@ -1,4 +1,5 @@
 from numpy import *
+import re
 
 class Pyximity:
   
@@ -23,3 +24,14 @@ class Pyximity:
     weightsNorm = weights / weightSum
 
     return sum(array([values[i] for i in sortedDistanceIndexes]) * weightsNorm)
+    
+  @staticmethod
+  def createFromFiles(neighborFileName, valueFileName):
+    
+    neighborFile = open(neighborFileName)
+    valueFile = open(valueFileName)
+    
+    neighbors = array([re.findall('-?\d+', line) for line in neighborFile.readlines()], dtype=double)
+    values = array([re.findall('-?\d+', line)[0] for line in valueFile.readlines()], dtype=double)
+    
+    return Pyximity(neighbors, values)
